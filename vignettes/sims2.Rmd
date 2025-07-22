@@ -8,6 +8,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+future::plan(future::sequential)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
