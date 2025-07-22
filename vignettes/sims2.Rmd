@@ -21,7 +21,7 @@ sims is an R package to generate datasets from [JAGS](https://mcmc-jags.sourcefo
 By default, `sims_simulate()` returns the simulated datasets in the form of an [nlists](https://github.com/poissonconsulting/nlist) object.
 
 ```{r example}
-library(sims)
+library(sims2)
 set.seed(10)
 sims_simulate("a <- runif(1)", nsims = 2L)
 ```

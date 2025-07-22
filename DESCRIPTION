@@ -1,4 +1,4 @@
-Package: sims
+Package: sims2
 Title: Simulate Data from R or 'JAGS' Code
 Version: 0.0.4
 Authors@R: c(

@@ -1191,7 +1191,7 @@ test_that("simulate array", {
   skip_if_not_installed("rjags")
 
   withr::local_seed(10)
-  sims <- sims::sims_simulate("for(i in 1:2) {
+  sims <- sims2::sims_simulate("for(i in 1:2) {
   M[i,1] ~ dnorm(0,1)
   M[i,2] <- 2}")
   expect_equal(sims, nlist::nlists(nlist(M = matrix(c(
