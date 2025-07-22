@@ -42,7 +42,8 @@ jobs:
 
       - name: Download JAGS Windows
         if: runner.os == 'Windows'
-        run: curl -L -o C:\JAGS-4.3.0.exe https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/Windows/JAGS-4.3.0.exe/download
+        run: |
+          Invoke-WebRequest -Uri "https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/Windows/JAGS-4.3.0.exe/download" -OutFile "C:\JAGS-4.3.0.exe" -UseBasicParsing
         shell: powershell
 
       - name: Install JAGS Windows
