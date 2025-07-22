@@ -1,3 +1,4 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # sims2
@@ -7,12 +8,10 @@
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/poissonconsulting/sims2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/poissonconsulting/sims2/actions/workflows/R-CMD-check.yaml)
-[![Codecov](https://codecov.io/gh/poissonconsulting/sims2/graph/badge.svg)](https://app.codecov.io/gh/poissonconsulting/sims2)
+[![Codecov test
+coverage](https://codecov.io/gh/poissonconsulting/sims2/graph/badge.svg)](https://app.codecov.io/gh/poissonconsulting/sims2)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/sims2)](https://cran.r-project.org/package=sims2)
-![CRAN downloads](http://cranlogs.r-pkg.org/badges/sims2)
 <!-- badges: end -->
 
 sims2 is an R package to generate datasets from R or
@@ -29,8 +28,10 @@ Progress is reported using the
 You can install sims2 from
 [GitHub](https://github.com/poissonconsulting/sims2) with:
 
-    # install.packages("remotes")
-    remotes::install_github("poissonconsulting/sims2")
+``` r
+# install.packages("remotes")
+remotes::install_github("poissonconsulting/sims2")
+```
 
 ## Demonstration
 
@@ -39,27 +40,31 @@ You can install sims2 from
 By default, `sims_simulate()` returns the simulated datasets in the form
 of an [nlists](https://github.com/poissonconsulting/nlist) object.
 
-    library(sims2)
-    set.seed(10)
-    sims_simulate("a <- runif(1)", nsims = 2L)
-    #> $a
-    #> [1] 0.2213763
-    #> 
-    #> an nlists object of 2 nlist objects each with 1 numeric element
+``` r
+library(sims2)
+set.seed(10)
+sims_simulate("a <- runif(1)", nsims = 2L)
+#> $a
+#> [1] 0.2213763
+#> 
+#> an nlists object of 2 nlist objects each with 1 numeric element
+```
 
 If, however, `save = TRUE` then each nlist object is saved as an `.rds`
 file in `path`.
 
-    set.seed(10)
-    sims_simulate("a <- runif(1)", nsims = 2L, save = TRUE, path = tempdir(), exists = NA)
-    #> [1] TRUE
-    sims_data_files(tempdir())
-    #> [1] "data0000001.rds" "data0000002.rds"
-    sims_data(tempdir())
-    #> $a
-    #> [1] 0.2213763
-    #> 
-    #> an nlists object of 2 nlist objects each with 1 numeric element
+``` r
+set.seed(10)
+sims_simulate("a <- runif(1)", nsims = 2L, save = TRUE, path = tempdir(), exists = NA)
+#> [1] TRUE
+sims_data_files(tempdir())
+#> [1] "data0000001.rds" "data0000002.rds"
+sims_data(tempdir())
+#> $a
+#> [1] 0.2213763
+#> 
+#> an nlists object of 2 nlist objects each with 1 numeric element
+```
 
 ## Information
 
