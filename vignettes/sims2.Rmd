@@ -22,6 +22,7 @@ By default, `sims_simulate()` returns the simulated datasets in the form of an [
 
 ```{r example}
 library(sims2)
+future::plan(future::sequential)
 set.seed(10)
 sims_simulate("a <- runif(1)", nsims = 2L)
 ```
