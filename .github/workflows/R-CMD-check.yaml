@@ -40,17 +40,18 @@ jobs:
       - name: Install JAGS Linux
         if: runner.os == 'Linux'
         run: sudo apt-get install jags
-
+        
       - name: Download JAGS Windows
         if: runner.os == 'Windows'
         run: |
-          Invoke-WebRequest -Uri "https://downloads.sourceforge.net/project/mcmc-jags/JAGS/4.x/Windows/JAGS-4.3.0.exe" -OutFile "C:\JAGS-4.3.0.exe" -UseBasicParsing
+          Invoke-WebRequest -Uri "https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/Windows/JAGS-4.3.0.exe/download" -OutFile "$env:TEMP\JAGS-4.3.0.exe" -UseBasicParsing
         shell: powershell
-
+        
       - name: Install JAGS Windows
         if: runner.os == 'Windows'
-        run: C:\JAGS-4.3.0.exe /S
-        shell: cmd
+        run: |
+          Start-Process -FilePath "$env:TEMP\JAGS-4.3.0.exe" -ArgumentList '/S' -Wait
+        shell: powershell
 
       - uses: r-lib/actions/setup-pandoc@v2
 
