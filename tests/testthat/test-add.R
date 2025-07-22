@@ -166,7 +166,7 @@ test_that("sims_add", {
 
 test_that("sims_add options seed must be FALSE", {
   skip_if_not_installed("rjags")
-  
+
   tempdir <- file.path(tempdir(), "sims")
   unlink(tempdir, recursive = TRUE)
 
@@ -337,7 +337,7 @@ test_that("sims_add R", {
 
 test_that("sims_add parallel", {
   skip_if_not_installed("rjags")
-  
+
   tempdir <- file.path(tempdir(), "sims")
   unlink(tempdir, recursive = TRUE)
 
@@ -364,7 +364,7 @@ test_that("sims_add parallel", {
 
 test_that("progress", {
   skip_if_not_installed("rjags")
-  
+
   tempdir <- file.path(tempdir(), "sims")
   unlink(tempdir, recursive = TRUE)
 

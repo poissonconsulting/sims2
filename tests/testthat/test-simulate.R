@@ -28,7 +28,7 @@ test_that("test inputs", {
 
 test_that("test nodes not already defined", {
   skip_if_not_installed("rjags")
-  
+
   expect_error(
     sims_simulate("a ~ dunif(1)", nlist(a = 1)),
     "^The following variable nodes are defined in constants: 'a'[.]$"
@@ -37,27 +37,33 @@ test_that("test nodes not already defined", {
 
 test_that("test match at least one node", {
   skip_if_not_installed("rjags")
-  
+
   expect_error(
     sims_simulate("a ~ dunif(1)", list(x = 1),
       monitor = "b",
       stochastic = TRUE, latent = FALSE
     ),
-    paste0("^`monitor` must match at least one of the following",
-    " observed stochastic variable nodes: 'a'[.]$")
+    paste0(
+      "^`monitor` must match at least one of the following",
+      " observed stochastic variable nodes: 'a'[.]$"
+    )
   )
   expect_error(
     sims_simulate("a ~ dunif(1)", list(x = 1), monitor = "b"),
-    paste0("^`monitor` must match at least one of the following variable",
-    " nodes: 'a'[.]$")
+    paste0(
+      "^`monitor` must match at least one of the following variable",
+      " nodes: 'a'[.]$"
+    )
   )
   expect_error(
     sims_simulate("a ~ dunif(1)", list(x = 1),
       monitor = "b",
       stochastic = FALSE, latent = FALSE
     ),
-    paste0("^JAGS code must include at least one observed",
-    " deterministic variable node[.]$")
+    paste0(
+      "^JAGS code must include at least one observed",
+      " deterministic variable node[.]$"
+    )
   )
   expect_error(
     sims_simulate("a ~ dunif(1)", list(x = 1),
@@ -72,8 +78,10 @@ test_that("test match at least one node", {
       monitor = "b",
       stochastic = FALSE, latent = FALSE
     ),
-    paste0("^`monitor` must match at least one of the following",
-    " observed deterministic variable nodes: 'a2'[.]$")
+    paste0(
+      "^`monitor` must match at least one of the following",
+      " observed deterministic variable nodes: 'a2'[.]$"
+    )
   )
   expect_error(
     sims_simulate("a ~ dunif(1)
@@ -81,8 +89,10 @@ test_that("test match at least one node", {
       monitor = "b",
       stochastic = FALSE
     ),
-    paste0("^`monitor` must match at least one of the following",
-    " deterministic variable nodes: 'a2'[.]$")
+    paste0(
+      "^`monitor` must match at least one of the following",
+      " deterministic variable nodes: 'a2'[.]$"
+    )
   )
   expect_error(
     sims_simulate("a ~ dunif(1)
@@ -90,14 +100,16 @@ test_that("test match at least one node", {
       monitor = "b",
       stochastic = NA, latent = NA
     ),
-    paste0("^`monitor` must match at least one of the following",
-    " variable nodes: 'a' or 'a2'[.]$")
+    paste0(
+      "^`monitor` must match at least one of the following",
+      " variable nodes: 'a' or 'a2'[.]$"
+    )
   )
 })
 
 test_that("not in model or data block", {
   skip_if_not_installed("rjags")
-  
+
   expect_error(
     sims_simulate("model {a ~ dunif(1)}", nlist(x = 1), monitor = "a"),
     "^JAGS code must not be in a data or model block."
@@ -110,7 +122,7 @@ test_that("not in model or data block", {
 
 test_that("generates data with replicability", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(1)
   expect_equal(
     sims_simulate("a ~ dunif(0,1)"),
@@ -135,7 +147,7 @@ test_that("generates data with replicability", {
 
 test_that("generates data with replicability if repeated calls", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(1)
   expect_equal(
     sims_simulate("a ~ dunif(0,1)"),
@@ -169,7 +181,7 @@ test_that("generates data with replicability if repeated calls", {
 
 test_that("save", {
   skip_if_not_installed("rjags")
-  
+
   tempdir <- file.path(tempdir(), "sims")
   unlink(tempdir, recursive = TRUE)
 
@@ -206,7 +218,7 @@ test_that("save", {
 
 test_that("gets deterministic nodes", {
   skip_if_not_installed("rjags")
-  
+
   generative_model <- "
 for (i in 1:length(year)) {
   cc[i] ~ dpois(lambda[i])
@@ -265,7 +277,7 @@ test_that("gets deterministic nodes with R code", {
 
 test_that("nsims can take numeric", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("a ~ dunif(0,1)"),
@@ -275,7 +287,7 @@ test_that("nsims can take numeric", {
 
 test_that("nsims > 1", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("a ~ dunif(0,1)", nsims = 2L),
@@ -296,7 +308,7 @@ test_that("nsims > 1", {
 
 test_that("write replicable", {
   skip_if_not_installed("rjags")
-  
+
   tempdir <- file.path(tempdir(), "sims")
   unlink(tempdir, recursive = TRUE)
 
@@ -465,7 +477,7 @@ test_that("write replicable", {
 
 test_that("write replicable > 1", {
   skip_if_not_installed("rjags")
-  
+
   tempdir <- file.path(tempdir(), "sims")
   unlink(tempdir, recursive = TRUE)
 
@@ -536,7 +548,7 @@ test_that("write replicable > 1", {
 
 test_that("monitor", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("a ~ dunif(0,1)"),
@@ -548,8 +560,10 @@ test_that("monitor", {
       monitor = c("a", "a"),
       stochastic = TRUE, latent = FALSE
     ),
-    paste0("^`monitor` must include at least one of the following",
-    " observed stochastic variable nodes: 'ab'[.]$")
+    paste0(
+      "^`monitor` must include at least one of the following",
+      " observed stochastic variable nodes: 'ab'[.]$"
+    )
   )
 
   expect_error(
@@ -557,8 +571,10 @@ test_that("monitor", {
       monitor = c("a", "a"),
       stochastic = FALSE, latent = FALSE
     ),
-    paste0("^JAGS code must include at least one observed deterministic",
-    " variable node[.]$")
+    paste0(
+      "^JAGS code must include at least one observed deterministic",
+      " variable node[.]$"
+    )
   )
 
   expect_error(
@@ -574,21 +590,25 @@ test_that("monitor", {
       monitor = c("ab", "a"),
       stochastic = TRUE, latent = FALSE
     ),
-    paste0("^The following in `monitor` are not observed",
-    " stochastic variable nodes: 'a'[.]$")
+    paste0(
+      "^The following in `monitor` are not observed",
+      " stochastic variable nodes: 'a'[.]$"
+    )
   )
 })
 
 test_that("append constants", {
   skip_if_not_installed("rjags")
-  
+
   expect_error(
     sims_simulate("ab ~ dunif(0,1)",
       monitor = c("a", "a"),
       stochastic = TRUE, latent = FALSE
     ),
-    paste0("^`monitor` must include at least one of the following",
-    " observed stochastic variable nodes: 'ab'[.]")
+    paste0(
+      "^`monitor` must include at least one of the following",
+      " observed stochastic variable nodes: 'ab'[.]"
+    )
   )
 
   expect_warning(
@@ -596,14 +616,16 @@ test_that("append constants", {
       monitor = c("ab", "a"),
       stochastic = TRUE, latent = FALSE
     ),
-    paste0("^The following in `monitor` are not observed",
-    " stochastic variable nodes: 'a'[.]$")
+    paste0(
+      "^The following in `monitor` are not observed",
+      " stochastic variable nodes: 'a'[.]$"
+    )
   )
 })
 
 test_that("parallel with registered", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("a ~ dunif(0,1)"),
@@ -611,7 +633,7 @@ test_that("parallel with registered", {
   )
 
   use_local_plan(future::multisession)
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("a ~ dunif(0,1)"),
@@ -630,7 +652,7 @@ test_that("parallel with registered", {
 
 test_that("parallel with registered files", {
   skip_if_not_installed("rjags")
-  
+
   tempdir <- file.path(tempdir(), "sims")
   unlink(tempdir, recursive = TRUE)
 
@@ -661,7 +683,7 @@ test_that("parallel with registered files", {
   )
 
   use_local_plan(future::multisession)
-  
+
   withr::local_seed(101)
   expect_true(sims_simulate("a ~ dunif(0,1)",
     nsims = 2L, path = tempdir, save = TRUE,
@@ -681,7 +703,7 @@ test_that("parallel with registered files", {
 
 test_that("write existing with random file not touched", {
   skip_if_not_installed("rjags")
-  
+
   tempdir <- file.path(tempdir(), "sims")
   unlink(tempdir, recursive = TRUE)
 
@@ -729,7 +751,7 @@ test_that("write existing with random file not touched", {
 
 test_that("names with dots and underscores", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("x.y ~ dunif(0,1)", nsims = 2L),
@@ -750,7 +772,7 @@ test_that("names with dots and underscores", {
 
 test_that("stochastic nodes", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("x ~ dunif(0,1)
@@ -773,7 +795,7 @@ test_that("stochastic nodes", {
 
 test_that("latent nodes", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("x ~ dunif(0,1)
@@ -796,7 +818,7 @@ test_that("latent nodes", {
 
 test_that("latent, stochastic nodes", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("x ~ dunif(0,1)
@@ -877,7 +899,7 @@ test_that("latent, stochastic nodes", {
 
 test_that("latent, stochastic nodes with dots on end", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("x ~ dunif(0,1)
@@ -890,7 +912,7 @@ test_that("latent, stochastic nodes with dots on end", {
 
 test_that("handles =", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(101)
   expect_error(
     sims_simulate("Y = beta + epsilon
@@ -921,7 +943,7 @@ test_that("handles =", {
 
 test_that("with [] latent variables", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("a ~ dt(theta[1],theta[2],df)",
@@ -933,7 +955,7 @@ test_that("with [] latent variables", {
 
 test_that("strips comments before", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("b ~ dnorm(a, 1)
@@ -1035,7 +1057,7 @@ test_that("with R code in parallel", {
   )
 
   use_local_plan(future::multisession)
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("a <- runif(1, 0, 1)", nsims = 2),
@@ -1059,8 +1081,10 @@ test_that("with R code and single stochastic node", {
   )
   withr::local_seed(101)
   expect_equal(
-    sims_simulate("a <- runif(1, 0, 1)", stochastic = FALSE,
-                  rdists = character(0)),
+    sims_simulate("a <- runif(1, 0, 1)",
+      stochastic = FALSE,
+      rdists = character(0)
+    ),
     nlist::nlists(nlist(a = 0.637362094961879))
   )
   expect_error(sims_simulate("a <- runif(1, 0, 1)",
@@ -1068,8 +1092,10 @@ test_that("with R code and single stochastic node", {
   ), "R code must include at least one observed deterministic variable node.")
   expect_error(sims_simulate("a <- runif(1, 0, 1)",
     stochastic = TRUE, rdists = character(0)
-  ), paste0("^R code must include at least one stochastic variable node[.]",
-  " Did you mean to set `rdists` = character[(]0[)]\\?$"))
+  ), paste0(
+    "^R code must include at least one stochastic variable node[.]",
+    " Did you mean to set `rdists` = character[(]0[)]\\?$"
+  ))
 })
 
 test_that("with R code and stochastic and deterministic nodes", {
@@ -1089,7 +1115,8 @@ test_that("with R code and stochastic and deterministic nodes", {
   expect_equal(
     sims_simulate("a <- runif(1, 0, 1)
                              b <- 1",
-                  stochastic = FALSE, rdists = character(0)),
+      stochastic = FALSE, rdists = character(0)
+    ),
     nlist::nlists(nlist(a = 0.637362094961879, b = 1))
   )
   withr::local_seed(101)
@@ -1119,8 +1146,10 @@ test_that("with R code & stochastic & deterministic nodes & different rdist", {
   expect_equal(
     sims_simulate("a <- runif(1, 0, 1)
                              runif <- 1
-                             b <- runif", stochastic = FALSE,
-                  latent = FALSE, rdists = character(0)),
+                             b <- runif",
+      stochastic = FALSE,
+      latent = FALSE, rdists = character(0)
+    ),
     nlist::nlists(nlist(a = 0.637362094961879, b = 1))
   )
   withr::local_seed(101)
@@ -1134,14 +1163,14 @@ test_that("with R code & stochastic & deterministic nodes & different rdist", {
 
 test_that("save parallel", {
   skip_if_not_installed("rjags")
-  
+
   tempdir <- withr::local_tempdir()
   unlink(tempdir, recursive = TRUE)
 
   withr::local_seed(1)
 
   use_local_plan(future::multisession)
-  
+
   expect_true(sims_simulate("a ~ dunif(0,1)",
     save = TRUE, exists = FALSE,
     path = tempdir,
@@ -1156,7 +1185,7 @@ test_that("save parallel", {
 
 test_that("simulate array", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(10)
   sims <- sims::sims_simulate("for(i in 1:2) {
   M[i,1] ~ dnorm(0,1)
@@ -1169,7 +1198,7 @@ test_that("simulate array", {
 
 test_that("progress", {
   skip_if_not_installed("rjags")
-  
+
   withr::local_seed(1)
   progressr::with_progress(x <- sims_simulate("a ~ dunif(0,1)", nsims = 1L))
   expect_equal(
@@ -1183,7 +1212,7 @@ test_that("progress", {
 
 test_that("save getwd", {
   skip_if_not_installed("rjags")
-  
+
   skip("only test getwd at console")
   tempdir <- withr::local_tempdir()
 

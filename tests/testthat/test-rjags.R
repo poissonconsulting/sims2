@@ -10,7 +10,7 @@ test_that("parallel.seeds is currently not reproducible", {
 
 test_that("rjags replicable when prior in model", {
   skip_if_not_installed("rjags")
-  
+
   code <- "model{beta ~ dunif(0,1)}"
 
   inits <- list(
@@ -36,7 +36,7 @@ test_that("rjags replicable when prior in model", {
 
 test_that("rjags not replicable when prior in data", {
   skip_if_not_installed("rjags")
-  
+
   code <- "data{beta ~ dunif(0,1)} model{dummy <- 0}"
 
   inits <- list(

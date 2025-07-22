@@ -1,5 +1,5 @@
 #' Copy Simulated Datasets
-#' 
+#'
 #' @inheritParams params
 #' @param exists A flag specifying whether `path_to` should already exist.
 #' If `exists = NA` it doesn't matter. If the directory already exists
