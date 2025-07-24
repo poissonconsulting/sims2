@@ -7,9 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
-Sys.setenv(R_FUTURE_PLAN = "sequential")
-future::plan(future::sequential)
+```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -88,7 +86,7 @@ unlink(paste0(tempdir(), "_copy"), recursive = TRUE, force = TRUE) # required to
 Parallelization is implemented using the [future](https://github.com/HenrikBengtsson/future) package.
 
 To use all available cores on the local machine simply execute the following code before calling `sims_simulate()`.
-```{r}
+```{r, eval = FALSE}
 library(future)
 plan(multisession)
 ```
