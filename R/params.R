@@ -1,6 +1,6 @@
-#' Parameters for sims functions
+#' Parameters for sims2 functions
 #'
-#' Descriptions of the parameters for the sims functions.
+#' Descriptions of the parameters for the sims2 functions.
 #'
 #' @keywords internal
 #' @name params

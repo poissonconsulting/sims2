@@ -12,8 +12,8 @@ Description: Generates data from R or 'JAGS' code for use in simulation
     implemented using the 'future' package.  Progress is reported using
     the 'progressr' package.
 License: MIT + file LICENSE
-URL: https://github.com/poissonconsulting/sims, https://poissonconsulting.github.io/sims/
-BugReports: https://github.com/poissonconsulting/sims/issues
+URL: https://github.com/poissonconsulting/sims2, https://poissonconsulting.github.io/sims2/
+BugReports: https://github.com/poissonconsulting/sims2/issues
 Depends: 
     R (>= 4.0.0)
 Imports:

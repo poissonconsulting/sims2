@@ -1,6 +1,6 @@
-# Getting help with sims
+# Getting help with sims2
 
-Thanks for using sims!
+Thanks for using sims2!
 Before filing an issue, there are a few places to explore and pieces to put together to make the process as smooth as possible.
 
 ## Make sure its new

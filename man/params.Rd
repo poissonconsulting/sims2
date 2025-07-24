@@ -2,7 +2,7 @@
 % Please edit documentation in R/params.R
 \name{params}
 \alias{params}
-\title{Parameters for sims functions}
+\title{Parameters for sims2 functions}
 \arguments{
 \item{path}{A string of the path to the directory with the simulated data.}
 
@@ -54,6 +54,6 @@ compatible files.}
 \item{silent}{A flag specifying whether to suppress warnings.}
 }
 \description{
-Descriptions of the parameters for the sims functions.
+Descriptions of the parameters for the sims2 functions.
 }
 \keyword{internal}
