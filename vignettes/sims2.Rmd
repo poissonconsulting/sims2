@@ -1,8 +1,8 @@
 ---
-title: "Get Started with sims"
+title: "Get Started with sims2"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Get Started with sims}
+  %\VignetteIndexEntry{Get Started with sims2}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-sims is an R package to generate datasets from [JAGS](https://mcmc-jags.sourceforge.io/) or R code for use in simulation studies.
+sims2 is an R package to generate datasets from [JAGS](https://mcmc-jags.sourceforge.io/) or R code for use in simulation studies.
 
 ## Simulating as `nlists` Objects
 
