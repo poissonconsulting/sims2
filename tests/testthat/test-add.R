@@ -370,6 +370,8 @@ test_that("progress", {
 
   withr::local_seed(101)
   expect_true(sims_simulate("a ~ dunif(0,1)", path = tempdir, save = TRUE))
+  
+  skip_if_not_installed("progressr")
   progressr::with_progress(x <- sims_add(nsims = 2L, path = tempdir))
 
   expect_equal(
