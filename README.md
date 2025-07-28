@@ -1,3 +1,4 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # sims2
@@ -13,8 +14,9 @@ coverage](https://codecov.io/gh/poissonconsulting/sims2/graph/badge.svg)](https:
 MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/)
 <!-- badges: end -->
 
-sims2 is an R package to generate datasets from R or
-[JAGS](https://mcmc-jags.sourceforge.io/) code for use in simulation
+`sims2` is a clone of the [`sims` R
+package](https://github.com/audrey-b/sims) to generate datasets from R
+or [JAGS](https://mcmc-jags.sourceforge.io/) code for use in simulation
 studies. The datasets are returned as an
 [nlists](https://github.com/poissonconsulting/nlist) object and/or saved
 to file as individual .rds files. Parallelization is implemented using
@@ -27,8 +29,10 @@ Progress is reported using the
 You can install sims2 from
 [GitHub](https://github.com/poissonconsulting/sims2) with:
 
-    # install.packages("remotes")
-    remotes::install_github("poissonconsulting/sims2")
+``` r
+# install.packages("remotes")
+remotes::install_github("poissonconsulting/sims2")
+```
 
 ## Demonstration
 
@@ -37,27 +41,31 @@ You can install sims2 from
 By default, `sims_simulate()` returns the simulated datasets in the form
 of an [nlists](https://github.com/poissonconsulting/nlist) object.
 
-    library(sims2)
-    set.seed(10)
-    sims_simulate("a <- runif(1)", nsims = 2L)
-    #> $a
-    #> [1] 0.2213763
-    #> 
-    #> an nlists object of 2 nlist objects each with 1 numeric element
+``` r
+library(sims2)
+set.seed(10)
+sims_simulate("a <- runif(1)", nsims = 2L)
+#> $a
+#> [1] 0.2213763
+#> 
+#> an nlists object of 2 nlist objects each with 1 numeric element
+```
 
 If, however, `save = TRUE` then each nlist object is saved as an `.rds`
 file in `path`.
 
-    set.seed(10)
-    sims_simulate("a <- runif(1)", nsims = 2L, save = TRUE, path = tempdir(), exists = NA)
-    #> [1] TRUE
-    sims_data_files(tempdir())
-    #> [1] "data0000001.rds" "data0000002.rds"
-    sims_data(tempdir())
-    #> $a
-    #> [1] 0.2213763
-    #> 
-    #> an nlists object of 2 nlist objects each with 1 numeric element
+``` r
+set.seed(10)
+sims_simulate("a <- runif(1)", nsims = 2L, save = TRUE, path = tempdir(), exists = NA)
+#> [1] TRUE
+sims_data_files(tempdir())
+#> [1] "data0000001.rds" "data0000002.rds"
+sims_data(tempdir())
+#> $a
+#> [1] 0.2213763
+#> 
+#> an nlists object of 2 nlist objects each with 1 numeric element
+```
 
 ## Information
 
@@ -75,7 +83,7 @@ always welcome.
 
 ## Code of Conduct
 
-Please note that the sims2 project is released with a [Contributor Code
-of
+Please note that the `sims2` project is released with a [Contributor
+Code of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
