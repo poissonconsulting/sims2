@@ -977,19 +977,19 @@ test_that("with R code", {
     sims_simulate("a <- runif(1, 0, 1)", stochastic = NA),
     nlist::nlists(nlist(a = 0.637362094961879))
   )
-  
+
   withr::local_seed(101)
   expect_equal(
     sims_simulate("a <- runif(1, 0, 1)", stochastic = NA),
     nlist::nlists(nlist(a = 0.637362094961879))
   )
-  
+
   withr::local_seed(100)
   expect_equal(
     sims_simulate("a <- runif(1, 0, 1)", stochastic = NA),
     nlist::nlists(nlist(a = 0.959129601367507))
   )
-  
+
   expect_equal(
     sims_simulate("a <- runif(1, 0, 1)", stochastic = NA),
     nlist::nlists(nlist(a = 0.267390680177431))
@@ -1025,7 +1025,7 @@ test_that("with R code", {
     ),
     nlist::nlists(nlist(a = 2, b = 2, c = 2))
   )
-  
+
   expect_identical(
     sims_simulate("a <- c
                              b <- d",
@@ -1034,7 +1034,7 @@ test_that("with R code", {
     ),
     nlist::nlists(nlist(a = 2, b = 3L, c = 2))
   )
-  
+
   expect_identical(
     sims_simulate("a <- c
                              b <- d",
@@ -1043,7 +1043,7 @@ test_that("with R code", {
     ),
     nlist::nlists(nlist(b = 3L, c = 2))
   )
-  
+
   result <- sims_simulate("a <- not_a_fun(c)", stochastic = NA)
   expect_s3_class(result[[1]], "future_error")
   expect_match(result[[1]]$message, "could not find function \"not_a_fun\"")

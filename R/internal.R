@@ -236,26 +236,29 @@ generate_r <- function(code, data, monitor) {
 
 generate_dataset <- function(sim, code, is_jags, constants, parameters, monitor,
                              save, path, parallel, p) {
-  tryCatch({
-    if (!is.null(p)) p(message = "none")
-    data <- c(constants, parameters)
-    class(data) <- NULL
-    
-    nlist <- if (is_jags) {
-      generate_jags(code = code, data = data, monitor = monitor)
-    } else {
-      generate_r(code = code, data = data, monitor = monitor)
+  tryCatch(
+    {
+      if (!is.null(p)) p(message = "none")
+      data <- c(constants, parameters)
+      class(data) <- NULL
+
+      nlist <- if (is_jags) {
+        generate_jags(code = code, data = data, monitor = monitor)
+      } else {
+        generate_r(code = code, data = data, monitor = monitor)
+      }
+
+      nlist <- c(nlist, constants)
+      if (!isFALSE(save)) saveRDS(nlist, file.path(path, data_file_name(sim)))
+      if (isTRUE(save)) {
+        return(NULL)
+      }
+      nlist
+    },
+    error = function(e) {
+      structure(list(error = TRUE, message = conditionMessage(e)), class = "future_error")
     }
-    
-    nlist <- c(nlist, constants)
-    if (!isFALSE(save)) saveRDS(nlist, file.path(path, data_file_name(sim)))
-    if (isTRUE(save)) {
-      return(NULL)
-    }
-    nlist
-  }, error = function(e) {
-    structure(list(error = TRUE, message = conditionMessage(e)), class = "future_error")
-  })
+  )
 }
 
 save_args <- function(path, ...) {
@@ -275,7 +278,7 @@ generate_datasets <- function(code, constants, parameters, monitor, nsims,
       monitor = monitor, nsims = nsims, seed = seed
     )
   }
-  
+
   if (is_jags_code(code)) {
     is_jags <- TRUE
     if (!requireNamespace("rjags", quietly = TRUE)) {
@@ -292,7 +295,7 @@ generate_datasets <- function(code, constants, parameters, monitor, nsims,
   } else {
     p <- NULL
   }
-  
+
   nlists <- future_lapply(sims,
     FUN = generate_dataset,
     code = code, is_jags = is_jags,
@@ -300,10 +303,10 @@ generate_datasets <- function(code, constants, parameters, monitor, nsims,
     monitor = monitor, save = save,
     path = path, future.seed = get_seed_streams(nsims), p = p
   )
-  
+
   if (isTRUE(save)) {
     return(TRUE)
   }
-  
+
   set_class(nlists, "nlists")
 }
