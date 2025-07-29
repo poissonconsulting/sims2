@@ -1,3 +1,9 @@
 url: https://poissonconsulting.github.io/sims2/
+
 template:
   package: poissontemplate
+
+articles:
+  - title: Getting Started
+    contents:
+      - sims2
