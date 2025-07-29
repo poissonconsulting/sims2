@@ -1,4 +1,4 @@
 library(testthat)
-library(sims)
+library(sims2)
 
-test_check("sims")
+test_check("sims2")

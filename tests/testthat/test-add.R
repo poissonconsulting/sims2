@@ -166,7 +166,7 @@ test_that("sims_add", {
 
 test_that("sims_add options seed must be FALSE", {
   skip_if_not_installed("rjags")
-  
+
   tempdir <- file.path(tempdir(), "sims")
   unlink(tempdir, recursive = TRUE)
 
@@ -337,7 +337,7 @@ test_that("sims_add R", {
 
 test_that("sims_add parallel", {
   skip_if_not_installed("rjags")
-  
+
   tempdir <- file.path(tempdir(), "sims")
   unlink(tempdir, recursive = TRUE)
 
@@ -364,12 +364,14 @@ test_that("sims_add parallel", {
 
 test_that("progress", {
   skip_if_not_installed("rjags")
-  
+
   tempdir <- file.path(tempdir(), "sims")
   unlink(tempdir, recursive = TRUE)
 
   withr::local_seed(101)
   expect_true(sims_simulate("a ~ dunif(0,1)", path = tempdir, save = TRUE))
+  
+  skip_if_not_installed("progressr")
   progressr::with_progress(x <- sims_add(nsims = 2L, path = tempdir))
 
   expect_equal(

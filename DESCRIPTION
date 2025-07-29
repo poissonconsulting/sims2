@@ -1,10 +1,10 @@
-Package: sims
+Package: sims2
 Title: Simulate Data from R or 'JAGS' Code
-Version: 0.0.4
+Version: 0.1.0
 Authors@R: c(
     person("Audrey", "Beliveau", , "audrey.beliveau@uwaterloo.ca", role = c("aut", "cre")),
-    person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut"),
-           comment = c(ORCID = "0000-0002-7683-4592"))
+    person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut"), comment = c(ORCID = "0000-0002-7683-4592")),
+    person("Duncan", "Kennedy", , "duncan@poissonconsulting.ca", role = "ctb", comment = c(ORCID = "0009-0001-4880-5751"))
   )
 Description: Generates data from R or 'JAGS' code for use in simulation
     studies.  The data are returned as an 'nlist::nlists' object and/or
@@ -12,8 +12,8 @@ Description: Generates data from R or 'JAGS' code for use in simulation
     implemented using the 'future' package.  Progress is reported using
     the 'progressr' package.
 License: MIT + file LICENSE
-URL: https://github.com/poissonconsulting/sims, https://poissonconsulting.github.io/sims/
-BugReports: https://github.com/poissonconsulting/sims/issues
+URL: https://github.com/poissonconsulting/sims2, https://poissonconsulting.github.io/sims2/
+BugReports: https://github.com/poissonconsulting/sims2/issues
 Depends: 
     R (>= 4.0.0)
 Imports:
@@ -39,6 +39,6 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.2.9000
 SystemRequirements: JAGS 4.x.y
 Config/Needs/website: poissonconsulting/poissontemplate

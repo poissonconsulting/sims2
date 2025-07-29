@@ -30,19 +30,21 @@ sims_add <- function(path = ".",
 
   code <- argsims$code
   if (is_jags_code(code)) {
-    if(!requireNamespace("rjags", quietly = TRUE))
+    if (!requireNamespace("rjags", quietly = TRUE)) {
       err("Package 'rjags' must be installed to simulate data using JAGS code.")
+    }
     is_jags <- TRUE
   } else {
     is_jags <- FALSE
     code <- parse(text = code)
   }
 
-  if(requireNamespace("progressr", quietly = TRUE)) {
+  if (requireNamespace("progressr", quietly = TRUE)) {
     p <- progressr::progressor(along = sims)
-  } else 
+  } else {
     p <- NULL
-  
+  }
+
   nlists <- future_lapply(sims, generate_dataset,
     is_jags = is_jags,
     code = code,
