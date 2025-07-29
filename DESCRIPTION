@@ -3,8 +3,8 @@ Title: Simulate Data from R or 'JAGS' Code
 Version: 0.0.4
 Authors@R: c(
     person("Audrey", "Beliveau", , "audrey.beliveau@uwaterloo.ca", role = c("aut", "cre")),
-    person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut"),
-           comment = c(ORCID = "0000-0002-7683-4592"))
+    person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut"), comment = c(ORCID = "0000-0002-7683-4592")),
+    person("Duncan", "Kennedy", , "duncan@poissonconsulting.ca", role = "ctb", comment = c(ORCID = "0009-0001-4880-5751"))
   )
 Description: Generates data from R or 'JAGS' code for use in simulation
     studies.  The data are returned as an 'nlist::nlists' object and/or
