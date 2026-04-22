@@ -21,6 +21,7 @@ Imports:
     future.apply,
     nlist,
     parallel,
+    rlang,
     stats,
     yesno
 Suggests: 
