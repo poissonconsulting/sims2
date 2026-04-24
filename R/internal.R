@@ -281,16 +281,16 @@ generate_datasets <- function(code, constants, parameters, monitor, nsims,
 
   if (is_jags_code(code)) {
     is_jags <- TRUE
-    if (!requireNamespace("rjags", quietly = TRUE)) {
-      err("Package 'rjags' must be installed to simulate data using JAGS code.")
-    }
+    rlang::check_installed("rjags",
+      reason = "to simulate data using JAGS code."
+    )
   } else {
     is_jags <- FALSE
     code <- parse(text = code)
   }
 
   sims <- 1:nsims
-  if (requireNamespace("progressr", quietly = TRUE)) {
+  if (rlang::is_installed("progressr")) {
     p <- progressr::progressor(along = sims)
   } else {
     p <- NULL
