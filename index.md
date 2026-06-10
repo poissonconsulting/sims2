@@ -16,6 +16,7 @@ You can install sims2 from
 [GitHub](https://github.com/poissonconsulting/sims2) with:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("poissonconsulting/sims2")
 ```
@@ -30,6 +31,7 @@ returns the simulated datasets in the form of an
 [nlists](https://github.com/poissonconsulting/nlist) object.
 
 ``` r
+
 library(sims2)
 set.seed(10)
 sims_simulate("a <- runif(1)", nsims = 2L)
@@ -43,6 +45,7 @@ If, however, `save = TRUE` then each nlist object is saved as an `.rds`
 file in `path`.
 
 ``` r
+
 set.seed(10)
 sims_simulate("a <- runif(1)", nsims = 2L, save = TRUE, path = tempdir(), exists = NA)
 #> [1] TRUE

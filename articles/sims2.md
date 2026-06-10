@@ -12,6 +12,7 @@ returns the simulated datasets in the form of an
 [nlists](https://github.com/poissonconsulting/nlist) object.
 
 ``` r
+
 library(sims2)
 set.seed(10)
 sims_simulate("a <- runif(1)", nsims = 2L)
@@ -27,6 +28,7 @@ If, however, `save = TRUE` then each nlist object is saved as an `.rds`
 file in `path`.
 
 ``` r
+
 set.seed(10)
 sims_simulate("a <- runif(1)", nsims = 2L, save = TRUE, path = tempdir(), exists = NA)
 #> [1] TRUE
@@ -41,6 +43,7 @@ using
 [`sims_data()`](https://poissonconsulting.github.io/sims2/reference/sims_data.md).
 
 ``` r
+
 sims_data(tempdir())
 #> $a
 #> [1] 0.2213763
@@ -56,6 +59,7 @@ imported using
 [`sims_info()`](https://poissonconsulting.github.io/sims2/reference/sims_info.md).
 
 ``` r
+
 sims_info(tempdir())[1:5]
 #> $code
 #> [1] "a <- runif(1)"
@@ -80,6 +84,7 @@ using
 [`sims_add()`](https://poissonconsulting.github.io/sims2/reference/sims_add.md).
 
 ``` r
+
 sims_add(tempdir(), nsims = 3L)
 #> [1] "data0000003.rds" "data0000004.rds" "data0000005.rds"
 sims_data_files(tempdir())
@@ -97,6 +102,7 @@ using
 [`sims_copy()`](https://poissonconsulting.github.io/sims2/reference/sims_copy.md)
 
 ``` r
+
 sims_copy(path_from = tempdir(), path_to = paste0(tempdir(), "_copy"))
 #> [1] "data0000001.rds" "data0000002.rds" "data0000003.rds" "data0000004.rds"
 #> [5] "data0000005.rds"
@@ -109,10 +115,12 @@ present using
 [`sims_check()`](https://poissonconsulting.github.io/sims2/reference/sims_check.md).
 
 ``` r
+
 sims_check(path = paste0(tempdir(), "_copy"))
 ```
 
 ``` r
+
 file.remove(file.path(paste0(tempdir(), "_copy"), "data0000005.rds"))
 #> [1] TRUE
 
@@ -131,11 +139,13 @@ following code before calling
 [`sims_simulate()`](https://poissonconsulting.github.io/sims2/reference/sims_simulate.md).
 
 ``` r
+
 library(future)
 plan(multisession)
 ```
 
 ``` r
+
 set.seed(10)
 sims_simulate("a <- runif(1)", nsims = 2L)
 #> $a
@@ -151,6 +161,7 @@ Progress is reported using the
 follows.
 
 ``` r
+
 library(progressr)
 with_progress(sims_simulate("a <- runif(1)", nsims = 1000L))
 #> $a
