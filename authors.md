@@ -18,13 +18,13 @@ Source:
 [`DESCRIPTION`](https://github.com/poissonconsulting/sims2/blob/main/DESCRIPTION)
 
 Beliveau A, Thorley J (2026). *sims2: Simulate Data from R or 'JAGS'
-Code*. R package version 0.1.0.9000,
+Code*. R package version 0.1.0.9001,
 <https://github.com/poissonconsulting/sims2>.
 
     @Manual{,
       title = {sims2: Simulate Data from R or 'JAGS' Code},
       author = {Audrey Beliveau and Joe Thorley},
       year = {2026},
-      note = {R package version 0.1.0.9000},
+      note = {R package version 0.1.0.9001},
       url = {https://github.com/poissonconsulting/sims2},
     }
