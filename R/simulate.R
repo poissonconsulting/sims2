@@ -42,21 +42,27 @@
 #' @examples
 #' set.seed(101)
 #' sims_simulate("a <- runif(1)", path = tempdir(), exists = NA, ask = FALSE)
-sims_simulate <- function(code,
-                          constants = nlist::nlist(),
-                          parameters = nlist::nlist(),
-                          monitor = ".*",
-                          stochastic = NA,
-                          latent = NA,
-                          nsims = 1,
-                          save = FALSE,
-                          path = ".",
-                          exists = FALSE,
-                          rdists = sims_rdists(),
-                          ask = getOption("sims.ask", TRUE),
-                          silent = FALSE) {
-  if (is.list(constants) && !is_nlist(constants)) class(constants) <- "nlist"
-  if (is.list(parameters) && !is_nlist(parameters)) class(parameters) <- "nlist"
+sims_simulate <- function(
+  code,
+  constants = nlist::nlist(),
+  parameters = nlist::nlist(),
+  monitor = ".*",
+  stochastic = NA,
+  latent = NA,
+  nsims = 1,
+  save = FALSE,
+  path = ".",
+  exists = FALSE,
+  rdists = sims_rdists(),
+  ask = getOption("sims.ask", TRUE),
+  silent = FALSE
+) {
+  if (is.list(constants) && !is_nlist(constants)) {
+    class(constants) <- "nlist"
+  }
+  if (is.list(parameters) && !is_nlist(parameters)) {
+    class(parameters) <- "nlist"
+  }
 
   chk_string(code)
   chk_nlist(constants)
@@ -84,15 +90,26 @@ sims_simulate <- function(code,
   check_variable_nodes(code, constants, rdists)
   check_variable_nodes(code, parameters, rdists)
 
-  if (!isFALSE(save)) create_path(path, exists, ask, silent)
+  if (!isFALSE(save)) {
+    create_path(path, exists, ask, silent)
+  }
 
-  monitor <- set_monitor(monitor, code, stochastic, latent,
-    rdists = rdists, silent = silent
+  monitor <- set_monitor(
+    monitor,
+    code,
+    stochastic,
+    latent,
+    rdists = rdists,
+    silent = silent
   )
 
-  generate_datasets(code, constants, parameters,
+  generate_datasets(
+    code,
+    constants,
+    parameters,
     monitor = monitor,
-    nsims = nsims, save = save,
+    nsims = nsims,
+    save = save,
     path = path
   )
 }

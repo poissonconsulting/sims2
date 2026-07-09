@@ -5,8 +5,7 @@
 #' @param nsims A count of the number of additional datasets to generate.
 #' @return A character vector of the names of the files created.
 #' @export
-sims_add <- function(path = ".",
-                     nsims = 1) {
+sims_add <- function(path = ".", nsims = 1) {
   chk_whole_number(nsims)
   chk_range(nsims, c(1, 1000000))
 
@@ -30,7 +29,8 @@ sims_add <- function(path = ".",
 
   code <- argsims$code
   if (is_jags_code(code)) {
-    rlang::check_installed("rjags",
+    rlang::check_installed(
+      "rjags",
       reason = "to simulate data using JAGS code."
     )
     is_jags <- TRUE
@@ -45,13 +45,17 @@ sims_add <- function(path = ".",
     p <- NULL
   }
 
-  nlists <- future_lapply(sims, generate_dataset,
+  nlists <- future_lapply(
+    sims,
+    generate_dataset,
     is_jags = is_jags,
     code = code,
     constants = argsims$constants,
     parameters = argsims$parameters,
-    monitor = argsims$monitor, save = TRUE,
-    path = path, p = p,
+    monitor = argsims$monitor,
+    save = TRUE,
+    path = path,
+    p = p,
     future.seed = get_seed_streams(argsims$nsims)[sims]
   )
   data_files(path)[sims]

@@ -18,17 +18,21 @@ test_that("rjags replicable when prior in model", {
     .RNG.seed = 799289926L
   )
 
-  model1 <- rjags::jags.model(textConnection(code),
+  model1 <- rjags::jags.model(
+    textConnection(code),
     data = list(),
     inits = inits,
-    n.adapt = 0, quiet = TRUE
+    n.adapt = 0,
+    quiet = TRUE
   )
   sample1 <- rjags::jags.samples(model1, variable.names = "beta", n.iter = 1)
 
-  model2 <- rjags::jags.model(textConnection(code),
+  model2 <- rjags::jags.model(
+    textConnection(code),
     data = list(),
     inits = inits,
-    n.adapt = 0, quiet = TRUE
+    n.adapt = 0,
+    quiet = TRUE
   )
   sample2 <- rjags::jags.samples(model2, variable.names = "beta", n.iter = 1)
   expect_identical(sample1, sample2)
@@ -44,17 +48,21 @@ test_that("rjags not replicable when prior in data", {
     .RNG.seed = 799289926L
   )
 
-  model1 <- rjags::jags.model(textConnection(code),
+  model1 <- rjags::jags.model(
+    textConnection(code),
     data = list(),
     inits = inits,
-    n.adapt = 0, quiet = TRUE
+    n.adapt = 0,
+    quiet = TRUE
   )
   sample1 <- rjags::jags.samples(model1, variable.names = "beta", n.iter = 1)
 
-  model2 <- rjags::jags.model(textConnection(code),
+  model2 <- rjags::jags.model(
+    textConnection(code),
     data = list(),
     inits = inits,
-    n.adapt = 0, quiet = TRUE
+    n.adapt = 0,
+    quiet = TRUE
   )
   sample2 <- rjags::jags.samples(model2, variable.names = "beta", n.iter = 1)
   expect_false(identical(sample1, sample2))
