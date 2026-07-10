@@ -5,7 +5,10 @@ check_variable_nodes <- function(x, y, rdists, y_name = substitute(y)) {
   if (length(defined)) {
     err(
       "The following variable nodes are defined in ",
-      y_name, ": ", cc(defined, " and "), "."
+      y_name,
+      ": ",
+      cc(defined, " and "),
+      "."
     )
   }
   x
@@ -39,7 +42,10 @@ stochastic_nodes_pattern <- function(x, pattern) {
 
   index <- "\\[[^\\]]*\\]"
 
-  pattern <- p0("[[:alnum:]_.]+(", index, "){0,1}\\s*[)]{0,1}",
+  pattern <- p0(
+    "[[:alnum:]_.]+(",
+    index,
+    "){0,1}\\s*[)]{0,1}",
     pattern,
     collapse = ""
   )
@@ -54,8 +60,12 @@ stochastic_nodes_pattern <- function(x, pattern) {
 
 stochastic_nodes_jags <- function(x, stochastic) {
   pattern <- "[~]|([<][-])|[=]"
-  if (isTRUE(stochastic)) pattern <- "[~]"
-  if (isFALSE(stochastic)) pattern <- "([<][-])|[=]"
+  if (isTRUE(stochastic)) {
+    pattern <- "[~]"
+  }
+  if (isFALSE(stochastic)) {
+    pattern <- "([<][-])|[=]"
+  }
   stochastic_nodes_pattern(x, pattern)
 }
 
@@ -95,7 +105,8 @@ latent_nodes <- function(x, nodes, latent) {
   }
   nodes2 <- gsub("[.]", "[.]", nodes)
   patterns <- p0(
-    "([~]|([<][-])|(=))[^\n;]*\\b", nodes2,
+    "([~]|([<][-])|(=))[^\n;]*\\b",
+    nodes2,
     "([^[:alnum:]_.]|\n|$)"
   )
   lateo <- vapply(patterns, grepl, TRUE, x = x)
@@ -129,7 +140,9 @@ set_monitor <- function(monitor, code, stochastic, latent, rdists, silent) {
   if (!length(variable_nodes)) {
     err(
       if (is_jags_code(code)) "JAGS" else "R",
-      " code must include at least one ", desc, "."
+      " code must include at least one ",
+      desc,
+      "."
     )
   }
 
@@ -137,8 +150,11 @@ set_monitor <- function(monitor, code, stochastic, latent, rdists, silent) {
     monitor <- variable_nodes[grepl(monitor, variable_nodes)]
     if (!length(monitor)) {
       err(
-        "`monitor` must match at least one of the following ", desc, "s: ",
-        cc(variable_nodes, " or "), "."
+        "`monitor` must match at least one of the following ",
+        desc,
+        "s: ",
+        cc(variable_nodes, " or "),
+        "."
       )
     }
     return(monitor)
@@ -151,14 +167,20 @@ set_monitor <- function(monitor, code, stochastic, latent, rdists, silent) {
 
   if (length(missing) == length(monitor)) {
     err(
-      "`monitor` must include at least one of the following ", desc, "s: ",
-      cc(variable_nodes, " or "), "."
+      "`monitor` must include at least one of the following ",
+      desc,
+      "s: ",
+      cc(variable_nodes, " or "),
+      "."
     )
   }
   if (!silent) {
     wrn(
-      "The following in `monitor` are not ", desc, "s: ",
-      cc(missing, " or "), "."
+      "The following in `monitor` are not ",
+      desc,
+      "s: ",
+      cc(missing, " or "),
+      "."
     )
   }
 
@@ -179,10 +201,16 @@ create_path <- function(path, exists, ask, silent) {
   }
   files <- list.files(path, pattern = "^data\\d{7,7}[.]rds$")
   if (length(files)) {
-    if (ask && !yesno(
-      "Delete ", length(files), " sims data files in '",
-      path, "'?"
-    )) {
+    if (
+      ask &&
+        !yesno(
+          "Delete ",
+          length(files),
+          " sims data files in '",
+          path,
+          "'?"
+        )
+    ) {
       err(length(files), " existing sims data files in '", path, "'.")
     }
     if (!ask && !silent) {
@@ -216,12 +244,17 @@ generate_jags <- function(code, data, monitor) {
   inits <- list(.RNG.name = "base::Wichmann-Hill")
   inits$.RNG.seed <- abs(rinteger(1))
 
-  model <- rjags::jags.model(code,
-    data = data, inits = inits,
-    n.adapt = 0, quiet = TRUE
+  model <- rjags::jags.model(
+    code,
+    data = data,
+    inits = inits,
+    n.adapt = 0,
+    quiet = TRUE
   )
-  sample <- rjags::jags.samples(model,
-    variable.names = monitor, n.iter = 1L,
+  sample <- rjags::jags.samples(
+    model,
+    variable.names = monitor,
+    n.iter = 1L,
     progress.bar = "none"
   )
   set_class(lapply(sample, as_natomic_mcarray), "nlist")
@@ -234,11 +267,23 @@ generate_r <- function(code, data, monitor) {
   nlist
 }
 
-generate_dataset <- function(sim, code, is_jags, constants, parameters, monitor,
-                             save, path, parallel, p) {
+generate_dataset <- function(
+  sim,
+  code,
+  is_jags,
+  constants,
+  parameters,
+  monitor,
+  save,
+  path,
+  parallel,
+  p
+) {
   tryCatch(
     {
-      if (!is.null(p)) p(message = "none")
+      if (!is.null(p)) {
+        p(message = "none")
+      }
       data <- c(constants, parameters)
       class(data) <- NULL
 
@@ -249,14 +294,19 @@ generate_dataset <- function(sim, code, is_jags, constants, parameters, monitor,
       }
 
       nlist <- c(nlist, constants)
-      if (!isFALSE(save)) saveRDS(nlist, file.path(path, data_file_name(sim)))
+      if (!isFALSE(save)) {
+        saveRDS(nlist, file.path(path, data_file_name(sim)))
+      }
       if (isTRUE(save)) {
         return(NULL)
       }
       nlist
     },
     error = function(e) {
-      structure(list(error = TRUE, message = conditionMessage(e)), class = "future_error")
+      structure(
+        list(error = TRUE, message = conditionMessage(e)),
+        class = "future_error"
+      )
     }
   )
 }
@@ -266,22 +316,34 @@ save_args <- function(path, ...) {
   saveRDS(args, file.path(path, ".sims.rds"))
 }
 
-generate_datasets <- function(code, constants, parameters, monitor, nsims,
-                              save, path) {
+generate_datasets <- function(
+  code,
+  constants,
+  parameters,
+  monitor,
+  nsims,
+  save,
+  path
+) {
   seed <- get_random_seed()
   on.exit(set_random_seed(seed, advance = TRUE))
 
   if (!isFALSE(save)) {
-    save_args(path,
+    save_args(
+      path,
       code = code,
-      constants = constants, parameters = parameters,
-      monitor = monitor, nsims = nsims, seed = seed
+      constants = constants,
+      parameters = parameters,
+      monitor = monitor,
+      nsims = nsims,
+      seed = seed
     )
   }
 
   if (is_jags_code(code)) {
     is_jags <- TRUE
-    rlang::check_installed("rjags",
+    rlang::check_installed(
+      "rjags",
       reason = "to simulate data using JAGS code."
     )
   } else {
@@ -296,12 +358,18 @@ generate_datasets <- function(code, constants, parameters, monitor, nsims,
     p <- NULL
   }
 
-  nlists <- future_lapply(sims,
+  nlists <- future_lapply(
+    sims,
     FUN = generate_dataset,
-    code = code, is_jags = is_jags,
-    constants = constants, parameters = parameters,
-    monitor = monitor, save = save,
-    path = path, future.seed = get_seed_streams(nsims), p = p
+    code = code,
+    is_jags = is_jags,
+    constants = constants,
+    parameters = parameters,
+    monitor = monitor,
+    save = save,
+    path = path,
+    future.seed = get_seed_streams(nsims),
+    p = p
   )
 
   if (isTRUE(save)) {
