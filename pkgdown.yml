@@ -1,9 +1,9 @@
 pandoc: 3.8.3
-pkgdown: 2.2.0
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   sims2: sims2.html
-last_built: 2026-06-23T08:13Z
+last_built: 2026-07-10T00:37Z
 urls:
   reference: https://poissonconsulting.github.io/sims2/reference
   article: https://poissonconsulting.github.io/sims2/articles
