@@ -1,7 +1,7 @@
 # Simulated Datasets
 
 Gets the simulated datasets as an
-[`nlist::nlists_object()`](https://rdrr.io/pkg/nlist/man/nlists.html).
+[`nlist::nlists_object()`](https://poissonconsulting.github.io/nlist/reference/nlists.html).
 There is no guarantee that all the datasets will fit in memory.
 
 ## Usage
@@ -18,7 +18,8 @@ sims_data(path = ".")
 
 ## Value
 
-An [`nlist::nlists_object()`](https://rdrr.io/pkg/nlist/man/nlists.html)
+An
+[`nlist::nlists_object()`](https://poissonconsulting.github.io/nlist/reference/nlists.html)
 of the simulated datasets.
 
 ## Examples

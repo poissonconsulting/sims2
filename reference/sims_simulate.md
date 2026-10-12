@@ -2,7 +2,7 @@
 
 Simulates datasets using JAGS or R code. By default returns the datasets
 as an
-[`nlist::nlists_object()`](https://rdrr.io/pkg/nlist/man/nlists.html).
+[`nlist::nlists_object()`](https://poissonconsulting.github.io/nlist/reference/nlists.html).
 If `path` is provided then the datasets are written to the directory as
 individual `.rds` files.
 
@@ -100,9 +100,9 @@ sims_simulate(
 ## Value
 
 By default an
-[`nlist::nlists_object()`](https://rdrr.io/pkg/nlist/man/nlists.html) of
-the simulated data. Otherwise if `path` is defined saves the datasets as
-individual `.rds` files and returns TRUE.
+[`nlist::nlists_object()`](https://poissonconsulting.github.io/nlist/reference/nlists.html)
+of the simulated data. Otherwise if `path` is defined saves the datasets
+as individual `.rds` files and returns TRUE.
 
 ## Details
 
